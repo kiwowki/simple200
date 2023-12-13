@@ -38,31 +38,33 @@ node.js는 php와 달리 보안 문제 해결이 필요하다.
 # client
 
 npx create-react-app .  
-npm install sass   
+npm install sass  
 npm install react-bootstrap bootstrap  
-npm install react-router-dom   
-   
+npm install react-router-dom
+
 npm install axios  
 npm install http-proxy-middleware  
-(src폴더에 setupProxy.js 추가)   
-   
-npm i @emotion/css   
-npm i @emotion/react   
-npm i @emotion/styled @emotion/react   
-   
-npm install firebase   
-   
-npm install react-redux   
-npm install @reduxjs/toolkit   
+(src폴더에 setupProxy.js 추가)
+
+npm i @emotion/css  
+npm i @emotion/react  
+npm i @emotion/styled @emotion/react
+
+npm install firebase
+
+npm install react-redux  
+npm install @reduxjs/toolkit
 
 ### 제작과정
 
 [firebase 문서 바로가기](https://firebase.google.com/docs/auth/web/start?hl=ko&authuser=0)
 
 [redux](https://ko.redux.js.org/introduction/getting-started)
+
 - php의 session같이 부모자식관계가 아니더라도 확인할 수 있는 전역변수같은 어쩌구
 
 # NPM
+
 `npm install react-redux`
 `npm install @reduxjs/toolkit`
 
@@ -116,7 +118,7 @@ npm install mongoose --save;
 npm install multer --save;
 
 npm install --save aws-sdk@2.348.0
-npm install multer-s3 --save;
+npm install multer-s3@2.10.0
 
 (package.json파일에
 
@@ -309,88 +311,139 @@ const S3 = new AWS.S3({
 "multer-s3": "^3.0.1",
 
 2. 서버 util > upload.js
-   
-[multer-s3 적용하기 Usage](https://www.npmjs.com/package/multer-s3)
+
+- 이미지 기능 추가
+  [multer-s3 적용하기 Usage](https://www.npmjs.com/package/multer-s3)
 
 ```js
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const path = require("path");
 
-const endpoint = new AWS.Endpoint('https://kr.object.ncloudstorage.com');
-const region = 'kr-standard';
-const access_key = '마이페이지 -> 인증키 관리 -> Access Key ID';
-const secret_key = '마이페이지 -> 인증키 관리 -> secret Key';
-
+const endpoint = new AWS.Endpoint("https://kr.object.ncloudstorage.com");
+const region = "kr-standard";
+const access_key = "마이페이지 -> 인증키 관리 -> Access Key ID";
+const secret_key = "마이페이지 -> 인증키 관리 -> secret Key";
 
 const S3 = new AWS.S3({
-    endpoint: endpoint,
-    region: region,
-    credentials: {
-        accessKeyId: access_key,
-        secretAccessKey: secret_key
-    }
+  endpoint: endpoint,
+  region: region,
+  credentials: {
+    accessKeyId: access_key,
+    secretAccessKey: secret_key,
+  },
 });
 
 function setUpload(bucket) {
-    const upload = multer({
-        storage: multerS3({
-            s3: S3,
-            bucket: bucket,
-            acl: "public-read-write",
-            key: function (req, file, cb) {
-                let extenstion = path.extname(file.originalname)
-                cb(null, Date.now().toString() + extenstion);
-            }
-        })
-    }).single("file")
-    return upload
+  const upload = multer({
+    storage: multerS3({
+      s3: S3,
+      bucket: bucket,
+      acl: "public-read-write",
+      key: function (req, file, cb) {
+        let extenstion = path.extname(file.originalname);
+        cb(null, Date.now().toString() + extenstion);
+      },
+    }),
+  }).single("file");
+  return upload;
 }
 
 module.exports = setUpload;
-
 ```
 
-[multer 적용 후 이미지 업로드 시 504 or 500 오류](https://stackoverflow.com/questions/72431773/multers3-is-giving-this-client-send-is-not-a-function-error)
-- multer 버전 호환 오류. 
-`npm uninstall multer-s3` 로 기존 multer 삭제 후
-`npm i multer-s3@2.10.0` 로 새로 설치하기
-   
-   
+## 깃허브 관련
+
 - github 연동(repository생성 후 실행)
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin [https://github.com/kiwowki/simple200.git]([]빼고 자기 주소 넣기)
+  git add README.md
+  git commit -m "first commit"
+  git branch -M main
+  git remote add origin [https://github.com/kiwowki/simple200.git]([]빼고 자기 주소 넣기)
+  git push -u origin main
+
+- 깃 업로드 방법
+  npx create-react-app . 치기
+
+git add .  
+git status  
+git commit -m "어쩌구"  
 git push -u origin main
 
-- 
-npx create-react-app . 치기   
-   
-git add .   
-git status   
-git commit -m "어쩌구"   
-git push -u origin main   
-   
-   
 - .gitignore 설정(루트에)
-server/node_modules   
-server/package-lock.json
-client/node_modules
-client/package-lock.json
+  server/node_modules  
+  server/package-lock.json
+  client/node_modules
+  client/package-lock.json
 
+## 트러블 슈팅
 
-- [Git 경고 메세지] LF will be replaced by CRLF in 해결 방안
-`git config --global core.autocrlf true`
+<details>
+<summary>[Git 경고 메세지] LF will be replaced by CRLF in 해결 방안</summary>
 
-- 깃허브 화살표 폴더 문제 해결(깃허브 내 캐시 제거)
-[참고 사이트](https://velog.io/@yena1025/%EA%B9%83%ED%97%88%EB%B8%8C-%ED%99%94%EC%82%B4%ED%91%9C-%ED%8F%B4%EB%8D%94-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0)
+- `git config --global core.autocrlf true`
+</details>
+
+<details>
+<summary>깃허브 화살표 폴더 문제 해결(깃허브 내 캐시 제거)</summary>
 
 다음 작업들은 반드시 화살표가 생긴 폴더 경로에서 해야 한다.
 
-1) .git 파일 제거
-`rm -rf .git`
+1. .git 파일 제거 or 실제 폴더 안의 .git 폴더 제거
+   `rm -rf .git`
+2. 스테이지에 존재하는 파일 제거
+   `git rm --cached . -rf`
 
-2) 스테이지에 존재하는 파일 제거
-`git rm --cached . -rf`
+캐시 제거 후 루트 경로에서 다시 git add .
+
+[참고 사이트](https://velog.io/@yena1025/%EA%B9%83%ED%97%88%EB%B8%8C-%ED%99%94%EC%82%B4%ED%91%9C-%ED%8F%B4%EB%8D%94-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0)
+
+</details>
+
+<summary>fatal: not a git repository (or any of the parent directories): .git 에러</summary>
+
+<details>
+
+`$ git init`
+`$ git remote add origin`
+[참고 사이트](https://velog.io/@yoon_han0/fatal-not-a-git-repository-or-any-of-the-parent-directories-.git)
+
+</details>
+
+<summary>세팅 후 404 에러</summary>
+
+<details>
+
+보통 서버와 클라이언트 연동시 404에러가 난다면 Proxy설정을 안 했거나, 적용이 안 된 것이다.
+
+```js
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
+module.exports = function (app) {
+  app.use(
+    "/api",
+    createProxyMiddleware({
+      target: "http://localhost:5050",
+      changeOrigin: true,
+    })
+  );
+};
+```
+
+를 client > src > setupProxy.js 에 저장하고 한 번 껐다 켜면 에러가 사라진다.
+
+[http-proxy-middleware](https://create-react-app.dev/docs/proxying-api-requests-in-development)
+
+- Back-End Integration -> Proxying in Development의 맨 밑 코드 복사하기
+
+</details>
+
+<summary>multer 적용 후 이미지 업로드 시 504 or 500 오류</summary>
+<details>
+
+[참고 사이트](https://stackoverflow.com/questions/72431773/multers3-is-giving-this-client-send-is-not-a-function-error)
+
+- multer 버전 호환 오류.
+  `npm uninstall multer-s3` 로 기존 multer 삭제 후
+  `npm i multer-s3@2.10.0` 로 새로 설치하기
+  </details>
