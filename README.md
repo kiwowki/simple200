@@ -38,22 +38,22 @@ node.js는 php와 달리 보안 문제 해결이 필요하다.
 # client
 
 npx create-react-app .  
-npm install sass
+npm install sass   
 npm install react-bootstrap bootstrap  
-npm install react-router-dom
-
+npm install react-router-dom   
+   
 npm install axios  
 npm install http-proxy-middleware  
-(src폴더에 setupProxy.js 추가)
-
-npm i @emotion/css
-npm i @emotion/react
-npm i @emotion/styled @emotion/react
-
-npm install firebase
-
-npm install react-redux
-npm install @reduxjs/toolkit
+(src폴더에 setupProxy.js 추가)   
+   
+npm i @emotion/css   
+npm i @emotion/react   
+npm i @emotion/styled @emotion/react   
+   
+npm install firebase   
+   
+npm install react-redux   
+npm install @reduxjs/toolkit   
 
 ### 제작과정
 
