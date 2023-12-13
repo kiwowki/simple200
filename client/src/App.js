@@ -1,17 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginUser, clearUser } from './reducer/userSlice.js'
+import firebase from './firebase.js'
+
 import Header from './components/layout/Header'
 import Main from './components/layout/Main'
 import Footer from './components/layout/Footer'
+
+import Home from './pages/Home'
 import Write from './components/post/Write'
 import List from './components/post/List'
 import Detail from './components/post/Detail'
 import Modify from './components/post/Modify'
-import Home from './pages/Home'
 import Login from './components/user/Login'
 import Join from './components/user/Join'
 
+
 const App = () => {
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged((userInfo) => {
+            console.log("userInfo : ", userInfo);
+        })
+    }, []);
+    useEffect(() => { 
+        firebase.auth().signOut();
+    }, []);
     return (
         <>
             <Header />

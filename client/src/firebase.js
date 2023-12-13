@@ -1,16 +1,16 @@
-// import firebase from "firebase/compat/app";
-// import "firebase/compat/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBh17KWUHim71xlJM282F5Sl5jzmTsll5s",
-//     authDomain: "simple-blog100.firebaseapp.com",
-//     projectId: "simple-blog100",
-//     storageBucket: "simple-blog100.appspot.com",
-//     messagingSenderId: "683949324690",
-//     appId: "1:683949324690:web:a4e5fa3d450df353f0694b",
-// };
+const firebaseConfig = {
+    apiKey: "AIzaSyDW0sn3RFSaN9-tuz9Chmk1LshSvyqRFGA",
+    authDomain: "simple-200.firebaseapp.com",
+    projectId: "simple-200",
+    storageBucket: "simple-200.appspot.com",
+    messagingSenderId: "523296652813",
+    appId: "1:523296652813:web:3e56009eed33fabde35f44"
+};
 
 
-// firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
 
-// export default firebase;
+export default firebase;

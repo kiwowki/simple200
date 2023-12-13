@@ -446,4 +446,10 @@ module.exports = function (app) {
 - multer 버전 호환 오류.
   `npm uninstall multer-s3` 로 기존 multer 삭제 후
   `npm i multer-s3@2.10.0` 로 새로 설치하기
-  </details>
+
+</details>
+
+
+    <summary>회원가입 완료 버튼 누른 뒤 504 오류</summary>
+  <details>
+      </details>
